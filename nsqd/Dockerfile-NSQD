@@ -2,4 +2,4 @@ FROM python:latest
 ADD . /nsqd
 WORKDIR /nsqd
 RUN pip install -r requirements.txt
-CMD python nsqd.py
+CMD python NSQD.py
