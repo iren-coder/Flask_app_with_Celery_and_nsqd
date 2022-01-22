@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+    flask:
+        build: .
+        command: gunicorn -w 4 -b 0.0.0.0:5000 app:app
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/app
+        environment:
+            - DATABASE_URL=postgresql://postgres:password@postgres:5432/parsing_websites
+        depends_on:
+            - postgres
+            - redis
+    postgres:
+        image: postgres:12-alpine
+
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=parsing_websites
+    redis:
+        image: redis:5.0.7
+        ports:
+            - "6379:6379"
+    celery:
+        build: .
+        command: celery worker -A app.celery
+        environment:
+            - DATABASE_URL=postgresql://postgres:password@postgres:5432/parsing_websites
+            - CELERY_BROKER_URL=redis://redis:6379/0
+            - CELERY_RESULT_BACKEND=redis://redis:6379/0
+        depends_on:
+            - postgres
+            - redis
+            - flask
+        

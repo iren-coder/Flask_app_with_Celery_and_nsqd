@@ -1,0 +1,14 @@
+psycopg2-binary
+gunicorn
+flask
+sqlalchemy
+flask-sqlalchemy
+sqlalchemy-utils
+requests
+redis
+celery
+python-dotenv
+marshmallow~=3.7.1
+pynsq
+flask-wtf
+WTForms
