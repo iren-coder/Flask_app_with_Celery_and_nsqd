@@ -5,12 +5,13 @@
     <body>
  <table>
 {% for res in results %}
+
 <TR>
-   <th scope="col">{{res.address}}</th>
-   <th scope="col">{{r<th scope="row"><a href="{{ res.address }}">{{ res.address }}</a></th>
-                <td>{{ res.words_count }}</td>
-                <td><span>{{ res.http_status_code }}</span></td>
+   <TD class="c2">{{res.address}}</TD>
+   <TD class="c3">{{res.words_count}}</TD>
+   <TD class="c4"><SPAN>{{res.http_status_code}}</SPAN></TD>
 </TR>
+
 {% endfor %}
 </table>   </body>
 </html>
